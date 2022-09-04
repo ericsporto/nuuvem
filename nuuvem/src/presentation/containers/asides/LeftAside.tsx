@@ -4,6 +4,10 @@ import { IJokes } from '../../../interfaces/jokes.interface'
 import { ButtonStyled } from '../../components/button/Button.styles'
 import SearchInput from '../../components/input/InputSearch.styles'
 import { TextStyled } from '../../components/text/Text.styles'
+import ChuckImage from '../../../assets/realChuck.png'
+import Image from 'next/image'
+import { IsLoading } from '../../components/isLoading/IsLoading'
+
 
 export interface IJokesProps {
   setRandomJokes?: Dispatch<SetStateAction<IJokes>>
@@ -11,16 +15,21 @@ export interface IJokesProps {
   text: string
   setText: Dispatch<SetStateAction<string>>
   getTextJokes: () => void
+  textJokes: IJokes
+  isLoading: boolean
 }
 
 export default function LeftAside({
   setRandomJokes,
   setOpen,
   setText,
-  getTextJokes
+  getTextJokes,
+  textJokes,
+  isLoading
 }: IJokesProps) {
-  const { data, refetch } = useGetRandomJokes()
 
+  // Responsible to get random Jokes and pass to modal. Using react-query with refetch
+  const { data, refetch } = useGetRandomJokes()
   function getRandomJokes() {
     refetch()
     data && setRandomJokes(data)
@@ -40,9 +49,9 @@ export default function LeftAside({
             maxLength={120}
           />
         </div>
-        <div className="">
+        <div>
           <ButtonStyled onClick={getTextJokes} variant="primary">
-            Search
+            {isLoading ? <IsLoading /> : 'Search'}
           </ButtonStyled>
         </div>
       </div>
@@ -64,7 +73,17 @@ export default function LeftAside({
           </ButtonStyled>
         </div>
       </div>
-      {}
+      {textJokes ? (
+        <div className="flex w-full justify-center rounded-full mt-5">
+          <Image
+            src={ChuckImage}
+            width={400}
+            height={350}
+            alt="chuck image"
+            className="rounded-full"
+          />
+        </div>
+      ) : null}
     </div>
   )
 }

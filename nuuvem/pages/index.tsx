@@ -1,28 +1,30 @@
 import { NextPage } from 'next/types'
 import { useState } from 'react'
 import { toast } from 'react-toastify'
-import { IJokes } from '../src/interfaces/jokes.interface'
-import { DivContainer } from '../src/presentation/components/divContainer/DivContainer'
-import JokesModal from '../src/presentation/components/modal/Modal'
-import LeftAside from '../src/presentation/containers/asides/LeftAside'
-import RightAside from '../src/presentation/containers/asides/RightAside'
-import Footer from '../src/presentation/containers/footer/Footer'
-import Header from '../src/presentation/containers/header/Header'
-import { api } from '../src/services/api'
-import ChuckImage from '../src/assets/chuckImage.png'
+import { IJokes } from 'src/interfaces/jokes.interface'
+import { DivContainer } from 'src/presentation/components/divContainer/DivContainer'
+import JokesModal from 'src/presentation/components/modal/Modal'
+import LeftAside from 'src/presentation/containers/asides/LeftAside'
+import RightAside from 'src/presentation/containers/asides/RightAside'
+
+import Header from 'src/presentation/containers/header/Header'
+import { api } from 'src/services/api'
+import ChuckImage from 'src/assets/chuckImage.png'
 import Image from 'next/image'
-import { Container } from '../src/presentation/components/divContainer/Container'
-import { useGetTextJokes } from '../src/infra/query/useGetTextJokes'
+import { Container } from 'src/presentation/components/divContainer/Container'
+import Footer from 'src/presentation/containers/footer/Footer'
 
 const Home: NextPage = () => {
   const [text, setText] = useState('')
   const [open, setOpen] = useState(false)
   const [randomJokes, setRandomJokes] = useState<IJokes>()
   const [textJokes, setTextJokes] = useState<IJokes>()
+  const [isLoading, setIsLoading] = useState(false)
 
-  const { data } = useGetTextJokes()
 
+  // Responsible to get Jokes using input text as required query. Only axios to fetch in this case.
   async function getTextJokes() {
+    setIsLoading(true)
     try {
       const response = await api.get<IJokes>(`/search?query=${text}`)
       setTextJokes(response.data)
@@ -34,6 +36,8 @@ const Home: NextPage = () => {
           'Your search must contain between 3 and 120 characters, try again!'
         )
       }
+    } finally {
+      setIsLoading(false)
     }
   }
 
@@ -51,6 +55,8 @@ const Home: NextPage = () => {
           text={text}
           setText={setText}
           getTextJokes={getTextJokes}
+          textJokes={textJokes}
+          isLoading={isLoading}
         />
         <RightAside textJokes={textJokes} />
       </Container>

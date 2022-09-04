@@ -9,7 +9,7 @@ export function useGetTextJokes(): UseQueryResult<IJokes> {
   })
 }
 
-async function getTextJokes(text) {
+async function getTextJokes(text: any) {
   const resp = await api.get<IJokes>(`/search?query=${text}`)
 
   return resp.data

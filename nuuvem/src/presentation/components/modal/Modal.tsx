@@ -3,7 +3,7 @@ import { Dialog, Transition } from '@headlessui/react'
 import { IJokes } from '../../../interfaces/jokes.interface'
 import Image from 'next/image'
 import { ButtonStyled } from '../button/Button.styles'
-import RealChuck from '../../../assets/RealChuck.png'
+import RealChuck from '../../../assets/realChuck.png'
 
 export interface IModal {
   open: boolean

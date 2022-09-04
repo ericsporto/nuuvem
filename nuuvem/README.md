@@ -1,9 +1,18 @@
 # Nuuvem FrontEnd Testing
 
-Project aimed at the selection process for the vacancy of frontend developer at Nuuvem.
+The project was developed using Javascript as a base. As a framework I used React associated with Next Js. And why Next js? Even not taking full advantage of the framework such as SSR (Server side rendering), automatic routes (created when creating folders inside the Pages folder), dynamic routes and using only some of its Tags, I believe that NextJs is the best way to optimize of applications in React. Only its implementation can provide improvements both in optimization and in Google ranking SEO. Despite being a small project, I used reusable componentization, inspired by the theory of the organization of atoms to form cells, tissues, organs, systems, etc. There was no need to create contexts.
+
+![Screenshot](./src/assets/readme/page_desktop.PNG)
+![Screenshot](./src/assets/readme/search_desktop.PNG)
+![Screenshot](./src/assets/readme/modal_desktop.PNG)
+![Screenshot](./src/assets/readme/page_mobile.PNG)
+![Screenshot](./src/assets/readme/search_mobile.PNG)
+![Screenshot](./src/assets/readme/modal_mobile.PNG)
 
 ## 🚀 Project Access
 The project was uploaded to github below and will be sent in a zip file to the recruiter Luciana at Nuuvem:
+
+gitHub: https://github.com/ericsporto/nuuvem
 
 ### 🛠 Technologies
 The following tools must be installed due to project dependency.
@@ -21,6 +30,7 @@ React-toastify - (9.0.8) => Used for a better user experience when getting answe
 Axios - (0.27.2) => To make requests.
 React-query - (4.2.3) => Important ally to axios in the handling of requests. It has its own context that allows a smaller number of requests, in addition to having extremely interesting configuration methods regarding the quality of control of the requests themselves.
 Heroicons and headlessui - react icons lib.
+Testing-library/react - (13.3.0) => To realize tests.
 
 
 #### ✅ Run in development
